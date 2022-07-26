@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import MailIcon from "../icons/mail";
 import LoadingIcon from "../icons/loading";
 import NextLink from "next/link";
+import Offline from "../components/offline";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL as string;
 
@@ -101,6 +102,7 @@ const Login: NextPage = () => {
 
   return (
     <div className="w-screen h-screen dark:bg-bg">
+      <Offline />
       <div className="w-80 h-max py-4 rouned-lg border-2 border-slate-600 dark:border-slate-400 absolute inset-y-1/2 inset-x-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg">
         <h1 className="text-2xl font-medium text-center mb-2 dark:text-white">
           Login
