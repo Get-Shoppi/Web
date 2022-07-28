@@ -28,7 +28,7 @@ const Home: NextPage = () => {
       credentials: "include",
     });
     if (res.status === 401) {
-      router.push('/login');
+      router.push("/login");
       return;
     }
     const data = await res.json();
@@ -54,7 +54,10 @@ const Home: NextPage = () => {
   return (
     <div className="bg-white dark:bg-bg min-h-screen">
       <div className="w-screen border-b border-slate-400 py-2 drop-shadow-lg flex items-center justify-between px-2 mb-2">
-        <SettingsIcon className="dark:fill-white text-2xl" onClick={() => router.push('/settings')}/>
+        <SettingsIcon
+          className="dark:fill-white text-2xl"
+          onClick={() => router.push("/settings")}
+        />
         <h1 className="text-xl font-medium text-center dark:text-white">
           Your lists
         </h1>

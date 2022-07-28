@@ -65,10 +65,7 @@ const Login: NextPage = () => {
         "Content-Type": "application/json",
       },
     });
-
-    if (res.ok) {
-      setSuccessful(true);
-    }
+    setSuccessful(true);
   }
 
   // if the email was sent successfully, show a message

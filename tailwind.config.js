@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin')
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -11,5 +12,15 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addVariant, e }) {
+      addVariant('rx-checked', ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `[data-state='checked'] + .${e(
+            `rx-checked${separator}${className}`
+          )}`
+        })
+      })
+    }),
+  ],
 }

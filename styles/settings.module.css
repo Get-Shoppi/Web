@@ -1,0 +1,27 @@
+.switch {
+  @apply relative bg-red-400 rounded-full;
+  width: 42px;
+  height: 25px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.switch:focus {
+  box-shadow: 0 0 0 2px black;
+}
+
+.switch[data-state="checked"] {
+  @apply bg-green-400;
+}
+
+.thumb {
+  @apply block rounded-full will-change-transform bg-white;
+  width: 21px;
+  height: 21px;
+  box-shadow: 0 2px 2px #000;
+  transition: transform 100ms;
+  transform: translateX(2px);
+}
+
+.thumb[data-state="checked"] {
+  transform: translateX(19px);
+}
