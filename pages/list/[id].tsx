@@ -24,9 +24,10 @@ const List: NextPage = () => {
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [listId]);
 
   async function loadData() {
+    if (!listId) return;
     const res = await fetch(`${API_URL}/get-list`, {
       method: "POST",
       credentials: "include",
@@ -35,6 +36,10 @@ const List: NextPage = () => {
       },
       body: JSON.stringify({ listId }),
     });
+    if (res.status === 401) {
+      router.push("/login");
+      return;
+    }
     if (res.ok) {
       const { list } = await res.json();
       setList(list);
@@ -107,17 +112,23 @@ const List: NextPage = () => {
     <div className="bg-white dark:bg-bg min-h-screen">
       <div className="w-screen border-b border-slate-400 py-2 drop-shadow-lg flex items-center justify-between px-2 mb-2">
         {/* Balance the flex */}
-        <BackIcon className="dark:fill-white text-2xl" onClick={() => router.back()}/>
+        <BackIcon
+          className="dark:fill-white text-2xl cursor-pointer"
+          onClick={() => router.back()}
+        />
         <h1 className="text-xl font-medium text-center dark:text-white">
           {list.name}
         </h1>
-        <SettingsIcon className="dark:fill-white text-2xl" onClick={() => router.push(`/list/${listId}/settings`)} />
+        <SettingsIcon
+          className="dark:fill-white text-2xl cursor-pointer"
+          onClick={() => router.push(`/list/${listId}/settings`)}
+        />
       </div>
       <ul className="px-2">
         {list.items.map((item) => (
           <li
             key={item}
-            className="border-b border-slate-400 py-2 dark:text-white"
+            className="border-b border-slate-400 py-2 dark:text-white cursor-pointer"
             onClick={() => removeItem(item)}
           >
             {item}
